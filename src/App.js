@@ -1,11 +1,13 @@
-
-
+import Header from "./containers/Header/Header";
+import './App.css';
+import {Route, Routes} from "react-router-dom";
+import ContactList from "./containers/Contact List/ContactList";
 
 function App() {
   return (
-    <div className="App">
-    <h3>Contact List</h3>
-    </div>
+      <Routes>
+          <Route path='/' exact element={<Header/>}/>
+      </Routes>
   );
 }
 
