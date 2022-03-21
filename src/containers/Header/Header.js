@@ -7,8 +7,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import Button from '@mui/material/Button';
-import {IconButton, Link} from "@mui/material";
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import {Box, Icon, IconButton} from "@mui/material";
 import Grid from "@material-ui/core/Grid";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
@@ -16,6 +16,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import logo from '../../assets/logo/Logoo.png';
 import {ButtonGroup} from "reactstrap";
 import {green, grey, lightBlue, pink, yellow} from "@mui/material/colors";
+import {Link} from 'react-router-dom';
 
 const columns = [
     {   id: 'name',
@@ -97,9 +98,9 @@ export default function Header() {
                 <h1 style={{color:'orange'}}>Contact List</h1>
             </Grid>
             <Grid item xs={1}>
-                <Button variant="contained" color='success' >
-                    Add
-                </Button>
+                <Link to='/contacts/add'  >
+                    <AddCircleIcon color='success' fontSize='large'/>
+                </Link>
             </Grid>
 
             <Paper  sx={{ width: '100%', overflow: 'hidden' }}>
@@ -133,15 +134,22 @@ export default function Header() {
                                                             ? column.format(value)
                                                             : value ||
                                                             <ButtonGroup>
-                                                            <IconButton aria-label="delete" size="medium" color="error"  onClick={() => this.remove(row.id)}>
-                                                                <DeleteIcon fontSize="inherit" />
-                                                            </IconButton>
-                                                            <IconButton aria-label="edit" size="medium" sx={{ color: lightBlue[600] }}  tag={Link} to={"/contact/" + row.id}>
-                                                                <EditIcon fontSize="inherit" />
-                                                            </IconButton>
-                                                                <IconButton aria-label="info" size="medium" sx={{ color: grey[500] }}  tag={Link} to={"/contact/" + row.id}>
-                                                                    <InfoIcon fontSize="inherit" />
+                                                                <Link to={`/contacts/delete/contactId`}>
+                                                                    <IconButton aria-label="delete" size="medium" color="error"  onClick={() => this.remove(row.id)}>
+                                                                        <DeleteIcon fontSize="inherit" />
+                                                                    </IconButton>
+                                                                </Link>
+                                                            <Link to={`/contacts/edit/contactId`}>
+                                                                <IconButton aria-label="edit" size="medium" sx={{ color: lightBlue[600] }}  tag={Link} to={"/contact/" + row.id}>
+                                                                    <EditIcon fontSize="inherit" />
                                                                 </IconButton>
+                                                            </Link>
+                                                           <Link to={`/contacts/view/contactId`}>
+                                                               <IconButton aria-label="info" size="medium" sx={{ color: grey[500] }}  tag={Link} to={"/contact/" + row.id}>
+                                                                   <InfoIcon fontSize="inherit" />
+                                                               </IconButton>
+                                                           </Link>
+
                                                         </ButtonGroup>
                                                         }
 
