@@ -27,6 +27,7 @@ const AddContact = () => {
     const [profession, setProfession] = useState('')
     const [gender, setGender] = useState('')
 
+
     const navigate = useNavigate();
     const handleAddContactSubmit = (e) => {
         e.preventDefault();
@@ -68,7 +69,6 @@ const AddContact = () => {
                 <div className='row'>
                     <div className='col-6'>
                         <h1>New Contact</h1>
-                        <p>Add and view your books using local storage</p>
                         <div className='main'>
                             <div className='form-container'>
                                 <form autoComplete="off" className='form-group'
@@ -165,3 +165,5 @@ const AddContact = () => {
 
 
 export default AddContact
+
+
