@@ -1,24 +1,21 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import Grid from "@material-ui/core/Grid";
 import {Box, Checkbox, FormControl, FormControlLabel, InputLabel, NativeSelect, Radio, RadioGroup} from "@mui/material";
 import FormLabel from "@material-ui/core/FormLabel";
 import {ToastContainer, toast} from 'react-toastify';
 import {useNavigate} from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
+import {GlobalContext} from '../../context/GlobalContext';
 
 
-// getting the values of local storage
-const getDatafromLS = () => {
-    const data = localStorage.getItem('contacts');
-    if (data) {
-        return JSON.parse(data);
-    } else {
-        return []
-    }
-}
+
 const AddContact = () => {
+
+    const navigate = useNavigate();
+
+    const{ contacts,addContact} = useContext(GlobalContext)
+
     //state hooks
-    const [contacts, setContact] = useState(getDatafromLS());
     const [newsletter, setNewsletter] = useState(false)
     const [name, setName] = useState('')
     const [surname, setSurname] = useState('')
@@ -27,14 +24,10 @@ const AddContact = () => {
     const [profession, setProfession] = useState('')
     const [gender, setGender] = useState('')
 
-
-    const navigate = useNavigate();
-    const handleAddContactSubmit = (e) => {
+    const onSubmit = (e) => {
         e.preventDefault();
-        toast("Wow so easy!");
-
-        // creating an object
-        let contact = {
+        toast("Successfully added!");
+        const newContact = {
             id: contacts.length + 1,
             newsletter,
             name,
@@ -43,25 +36,13 @@ const AddContact = () => {
             email,
             profession,
             gender
-        }
-        setContact([...contacts, contact]);
-        setNewsletter();
-        setName('');
-        setSurname('');
-        setFathersName('');
-        setEmail('');
-        setProfession('');
-        setGender('');
+        };
+        addContact(newContact);
         setTimeout(() => {
             navigate('/contacts');
         }, 3000)
 
-
-    }
-
-    useEffect(() => {
-        localStorage.setItem('contacts', JSON.stringify(contacts));
-    }, [contacts])
+    };
 
     return (
         <>
@@ -72,32 +53,38 @@ const AddContact = () => {
                         <div className='main'>
                             <div className='form-container'>
                                 <form autoComplete="off" className='form-group'
-                                      onSubmit={handleAddContactSubmit}>
+                                      onSubmit={onSubmit}>
                                     <div className='row'>
                                         <div className='col-6'>
                                             <label>Name</label>
-                                            <input type="text" className="form-control" placeholder="Enter Name"
+                                            <input type="text" required className="form-control"
+                                                   placeholder="Enter Name"
                                                    name="name"
+
                                                    onChange={(event) => setName(event.target.value)}/>
                                         </div>
                                         <div className='col-6'>
                                             <label>Surname</label>
-                                            <input type="text" className="form-control" placeholder="Enter Surname"
+                                            <input type="text" required className="form-control"
+                                                   placeholder="Enter Surname"
                                                    name="surname"
+
                                                    onChange={(event) => setSurname(event.target.value)}/>
                                         </div>
                                     </div>
                                     <div className='row'>
                                         <div className='col-6'>
                                             <label>Father's Name</label>
-                                            <input type="text" className="form-control"
+                                            <input type="text" required className="form-control"
                                                    placeholder="Enter Father's Name"
                                                    name="fathersName"
+
                                                    onChange={(event) => setFathersName(event.target.value)}/>
                                         </div>
                                         <div className='col-6'>
                                             <label>Email</label>
-                                            <input type="email" className="form-control" placeholder="Enter email"
+                                            <input type="email" required className="form-control"
+                                                   placeholder="Enter email"
                                                    onChange={(event) => setEmail(event.target.value)}/>
                                         </div>
                                     </div>
@@ -109,6 +96,8 @@ const AddContact = () => {
                                             aria-labelledby="demo-radio-buttons-group-label"
                                             defaultValue="female"
                                             name="radio-buttons-group"
+                                            value={gender}
+                                            aria-required
                                         >
                                             <FormControlLabel name="gender" id="Female"
                                                               onChange={(event) => setGender(event.target.value)}
@@ -128,14 +117,16 @@ const AddContact = () => {
                                                 Profession
                                             </InputLabel>
                                             <NativeSelect
+                                                required
                                                 defaultValue={'Developer'}
                                                 inputProps={{
                                                     name: 'profession',
                                                     id: 'uncontrolled-native',
                                                 }}
+
                                                 onChange={(event) => setProfession(event.target.value)}
                                             >
-                                                <option id='developer' selected name='profession'>Developer</option>
+                                                <option id='developer' name='profession'>Developer</option>
                                                 <option id='designer' name='profession'>Designer</option>
                                                 <option id='teacher' name='profession'>Teacher</option>
                                                 <option id='doctor' name='profession'>Doctor</option>
@@ -162,6 +153,7 @@ const AddContact = () => {
         </>
     )
 }
+
 
 
 export default AddContact
