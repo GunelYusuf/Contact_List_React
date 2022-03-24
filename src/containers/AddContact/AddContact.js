@@ -6,6 +6,7 @@ import {ToastContainer, toast} from 'react-toastify';
 import {useNavigate} from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
 import {GlobalContext} from '../../context/GlobalContext';
+import InputField from "../../components/InputField";
 
 
 
@@ -40,7 +41,7 @@ const AddContact = () => {
         addContact(newContact);
         setTimeout(() => {
             navigate('/contacts');
-        }, 3000)
+        }, 1000)
 
     };
 
@@ -56,36 +57,46 @@ const AddContact = () => {
                                       onSubmit={onSubmit}>
                                     <div className='row'>
                                         <div className='col-6'>
-                                            <label>Name</label>
-                                            <input type="text" required className="form-control"
-                                                   placeholder="Enter Name"
-                                                   name="name"
-
-                                                   onChange={(event) => setName(event.target.value)}/>
+                                            <InputField
+                                                type="text"
+                                                value={name}
+                                                placeholder="Enter your name"
+                                                label="Name"
+                                                name="name"
+                                                onChange={(event) => setName(event.target.value)}
+                                            />
                                         </div>
                                         <div className='col-6'>
-                                            <label>Surname</label>
-                                            <input type="text" required className="form-control"
-                                                   placeholder="Enter Surname"
-                                                   name="surname"
-
-                                                   onChange={(event) => setSurname(event.target.value)}/>
+                                            <InputField
+                                                type="text"
+                                                value={surname}
+                                                placeholder="Enter your Surname"
+                                                label="Surname"
+                                                name="surname"
+                                                onChange={(event) => setSurname(event.target.value)}
+                                            />
                                         </div>
                                     </div>
                                     <div className='row'>
                                         <div className='col-6'>
-                                            <label>Father's Name</label>
-                                            <input type="text" required className="form-control"
-                                                   placeholder="Enter Father's Name"
-                                                   name="fathersName"
-
-                                                   onChange={(event) => setFathersName(event.target.value)}/>
+                                            <InputField
+                                                type="text"
+                                                value={fathersName}
+                                                placeholder="Enter your Father's Name"
+                                                label="Father's Name"
+                                                name="fathersName"
+                                                onChange={(event) => setFathersName(event.target.value)}
+                                            />
                                         </div>
                                         <div className='col-6'>
-                                            <label>Email</label>
-                                            <input type="email" required className="form-control"
-                                                   placeholder="Enter email"
-                                                   onChange={(event) => setEmail(event.target.value)}/>
+                                            <InputField
+                                                type="email"
+                                                value={email}
+                                                placeholder="Enter your Email Address"
+                                                label="Email"
+                                                name="email"
+                                                onChange={(event) => setEmail(event.target.value)}
+                                            />
                                         </div>
                                     </div>
                                     <ToastContainer position='top-center'/>

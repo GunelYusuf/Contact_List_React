@@ -2,7 +2,6 @@ import React, {createContext, useReducer,useEffect} from 'react';
 import Reducer from './Reducer';
 
 
-
 export const initialState = {
     contacts: localStorage.getItem('contacts') ? JSON.parse(localStorage.getItem('contacts')):[]
 };
@@ -32,12 +31,7 @@ export const GlobalProvider = ({children}) => {
         dispatch({
             type: "EDIT_CONTACT",
             payload: contact
-            // const editContact = action.payload;
-            // const editContacts = state.contacts.map((contact) => {
-            //     if (contact.id === editContact.id) {
-            //         return editContact;
-            //     }
-            //     return contact;
+
         });
     }
 

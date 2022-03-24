@@ -10,7 +10,7 @@ function App() {
           <Routes>
               <Route path={'/contacts'} exact element={<Header/>}/>
               <Route path={'/contacts/add'} element={<AddContact/>}/>
-              <Route path={'/contacts/edit/id'} element={<EditContact/>}/>
+              <Route path={'/contacts/edit/:id'} element={<EditContact/>}/>
           </Routes>
       </GlobalProvider>
   );
