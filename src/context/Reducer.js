@@ -1,5 +1,4 @@
 import {initialState} from "./GlobalContext";
-import React from "react";
 import Swal from 'sweetalert2'
 
 export default function Reducer(state = initialState, action) {
@@ -27,7 +26,7 @@ export default function Reducer(state = initialState, action) {
             const updatedContacts = state.contacts.map(contact => {
                 if (contact.id === editingContact.id)
                 {
-                    const result = editingContact==contact
+                    const result = editingContact===contact
                     if(!result){
                         Toast.fire({
                             icon: 'success',

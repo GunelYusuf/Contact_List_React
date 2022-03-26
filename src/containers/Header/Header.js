@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Link} from 'react-router-dom';
-import {useContext, useEffect, useState} from "react";
+import {useContext} from "react";
 import {Button, ButtonGroup} from "reactstrap";
 import {IconButton} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -30,7 +30,7 @@ export default function Header() {
                 let user;
                 Swal.fire(
                     'Deleted!',
-                    `User ${user = contacts.filter(x => x.id == id), user[0].name} has been deleted.`,
+                    `User ${user = contacts.filter(x => x.id === id), user[0].name} has been deleted.`,
                     'success'
                 )
                 removeContact(id)
@@ -41,7 +41,7 @@ export default function Header() {
 
 
     function viewContact(id) {
-        const currentUser = contacts.filter(u => u.id == id)
+        const currentUser = contacts.filter(u => u.id === id)
         Swal.fire({
                 html: ` <div class="container bootstrap snippets bootdey">
 <div class="panel-body inf-content">
@@ -84,7 +84,6 @@ export default function Header() {
                            ${currentUser[0].surname}  
                         </td>
                     </tr>
-
                     <tr>        
                         <td>
                             <strong>
@@ -96,8 +95,6 @@ export default function Header() {
                             ${currentUser[0].fathersName}
                         </td>
                     </tr>
-
-
                     <tr>        
                         <td>
                             <strong>
@@ -206,7 +203,3 @@ export default function Header() {
         </React.Fragment>
     );
 }
-
-
-
-
